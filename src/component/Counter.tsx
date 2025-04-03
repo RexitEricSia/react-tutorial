@@ -18,15 +18,16 @@ const Counter = () => {
         if (count <= 30) return "text-yellow-500"
         return "text-red-500"
     }
-    
+
     useEffect(() => {
-        if(count % 2 > 0) console.log("it is odd")
-    },[count])
+        if (count % 2 > 0) console.log("it is odd")
+    }, [count])
 
     return (
         <div>
             <div className="flex flex-col gap-4">
                 <div className="flex justify-center items-center bg-white shadow-lg rounded-lg w-64 h-64">
+                    {/* style={{ color: `${count <= 10 ? "green" : count <= 30 ? "yellow" : "red"}` }} */}
                     <h1 className={`font-medium text-2xl ${getColor()}`}>{count}</h1>
                 </div>
 
@@ -35,7 +36,7 @@ const Counter = () => {
                     <button onClick={handleMinus} className="bg-red-400 shadow-lgs py-4 rounded-lg w-1/2 text-lg">-</button>
                 </div>
             </div>
-            {count > 3 && <CounterMessage currentNumber={count}/>}
+            {count > 3 && <CounterMessage currentNumber={count} />}
         </div>
     )
 }

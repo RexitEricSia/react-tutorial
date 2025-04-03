@@ -8,8 +8,10 @@ const State = () => {
     const [stateNumber, setStateNumber] = useState(2222)
 
     const handleUpdateNumber = () => {
-        normalNumber = 9999
-        setStateNumber(stateNumber+1)
+        normalNumber = normalNumber + 1
+        setStateNumber(prev => prev + 1)
+
+        console.log(normalNumber)
         console.log(stateNumber)
     }
     

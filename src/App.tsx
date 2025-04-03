@@ -24,7 +24,7 @@ function App() {
               <Route path="/info" element={<Info />} />
               <Route path="/profile" element={<Profile />} />
             </Route>
-            <Route path="*" element={<Counter />} />
+            <Route path="*" element={<State />} />
           </Route>
         </Routes>
       </SwitchProvider>
