@@ -6,7 +6,7 @@ import { useAuth } from '../context/useAuth';
 
 const LoginForm = () => {
 
-    const { accessToken, setAccessToken, setRefreshToken } = useAuth();
+    const { accessToken, setAccessToken, refreshToken, setRefreshToken } = useAuth();
 
     const [formData, setFormData] = useState<LoginRequestDTO>({ username: '', password: '' });
     const [error, setError] = useState<string | null>(null);
@@ -17,6 +17,13 @@ const LoginForm = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if(accessToken) {
+            await authService.logout({refreshToken});
+            setAccessToken("")
+            setRefreshToken("")
+            return
+        }
 
         try {
             const res = await authService.login(formData)
@@ -64,7 +71,7 @@ const LoginForm = () => {
                 {error && <div className="font-medium text-red-600">{error}</div>}
                 <div className={`flex ${accessToken ? "justify-between" : "justify-end"} items-center`}>
                     {accessToken && <h1 className='font-medium text-green-500'>Logged In</h1>}
-                    <button type="submit" className='bg-stone-700 p-2 rounded-lg font-medium text-white'>Login</button>
+                    <button type="submit" className={`${accessToken? "bg-red-600" : "bg-stone-700"} p-2 rounded-lg font-medium text-white`}>{accessToken ? "Logout" : "Login"}</button>
                 </div>
             </form>
         </div>
