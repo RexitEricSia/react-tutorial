@@ -8,6 +8,8 @@ import State from "./component/State";
 import List from "./component/List";
 import NavBar from "./component/NavBar";
 import { SwitchProvider } from "./context/Provider/SwitchProvider";
+import Integration from "./page/Integration";
+import { AuthProvider } from "./context/Provider/AuthProvider";
 
 // // Lazy load components
 // import { lazy } from "react";
@@ -25,8 +27,9 @@ function App() {
 
   return (
     <Router>
-      <SwitchProvider>
-        {/* <Suspense fallback={<div>Loading...</div>}> */}
+      <AuthProvider>
+        <SwitchProvider>
+          {/* <Suspense fallback={<div>Loading...</div>}> */}
           <Routes>
             <Route element={<Layout />}>
               <Route path="/counter" element={<Counter />} />
@@ -36,12 +39,14 @@ function App() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/info" element={<Info />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/integration" element={<Integration />} />
               </Route>
               <Route path="*" element={<State />} />
             </Route>
           </Routes>
-        {/* </Suspense> */}
-      </SwitchProvider>
+          {/* </Suspense> */}
+        </SwitchProvider>
+      </AuthProvider>
     </Router >
   )
 }

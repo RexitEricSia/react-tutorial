@@ -15,6 +15,7 @@ const NavBar = () => {
                 <a href="/home">Home</a>
                 <Link to={"/info"}>Info</Link>
                 <button onClick={handleNavigate}>Profile</button>
+                <Link to={"/integration"}>Integration</Link>
             </div>
             <Outlet />
         </div>
