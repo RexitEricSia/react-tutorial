@@ -17,16 +17,69 @@ export const useCampaignService = () => {
         if (err instanceof AxiosError) {
           throw err;
         } else {
-          throw new Error("An unknown error occurred during login.");
+          throw new Error("An unknown error occurred while fetching campaigns.");
         }
       }
     },
-    getCampaignById: (id: number) => axios.get<Campaign>(`/campaign/${id}`),
-    createCampaign: (newCampaign: Campaign) => axios.post<Campaign>('/campaign', newCampaign),
-    updateCampaign: (id: number, updatedCampaign: Campaign) =>
-      axios.put<Campaign>(`/campaign/${id}`, updatedCampaign),
-    deleteCampaign: (id: number) => axios.delete<boolean>(`/campaign/${id}`),
-    patchCampaign: (id: number, patchData: CampaignPatchDTO) =>
-      axios.patch<Campaign>(`/campaign/${id}`, patchData),
+    getCampaignById: async (id: number) => {
+      try {
+        const response = await axios.get<Campaign>(`/campaign/${id}`);
+        return response.data;
+      } catch (err) {
+        if (err instanceof AxiosError) {
+          throw err;
+        } else {
+          throw new Error(`An unknown error occurred while fetching campaign with id ${id}.`);
+        }
+      }
+    },
+    createCampaign: async (newCampaign: Campaign) => {
+      try {
+        const response = await axios.post<Campaign>('/campaign', newCampaign);
+        return response.data;
+      } catch (err) {
+        if (err instanceof AxiosError) {
+          throw err;
+        } else {
+          throw new Error("An unknown error occurred while creating the campaign.");
+        }
+      }
+    },
+    updateCampaign: async (id: number, updatedCampaign: Campaign) => {
+      try {
+        const response = await axios.put<Campaign>(`/campaign/${id}`, updatedCampaign);
+        return response.data;
+      } catch (err) {
+        if (err instanceof AxiosError) {
+          throw err;
+        } else {
+          throw new Error(`An unknown error occurred while updating campaign with id ${id}.`);
+        }
+      }
+    },
+    deleteCampaign: async (id: number) => {
+      try {
+        const response = await axios.delete<boolean>(`/campaign/${id}`);
+        return response.data;
+      } catch (err) {
+        if (err instanceof AxiosError) {
+          throw err;
+        } else {
+          throw new Error(`An unknown error occurred while deleting campaign with id ${id}.`);
+        }
+      }
+    },
+    patchCampaign: async (id: number, patchData: CampaignPatchDTO) => {
+      try {
+        const response = await axios.patch<Campaign>(`/campaign/${id}`, patchData);
+        return response.data;
+      } catch (err) {
+        if (err instanceof AxiosError) {
+          throw err;
+        } else {
+          throw new Error(`An unknown error occurred while patching campaign with id ${id}.`);
+        }
+      }
+    },
   };
 };

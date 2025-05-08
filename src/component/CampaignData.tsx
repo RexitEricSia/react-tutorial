@@ -4,6 +4,7 @@ import { Campaign } from "../model/Campaign";
 import { AxiosError } from "axios";
 import CampaignModal from "../modal/CampaignModal";
 import { useCampaignService } from "../service/useCampaignService";
+import { motion } from "framer-motion";
 
 const CampaignData = () => {
 
@@ -48,13 +49,27 @@ const CampaignData = () => {
                     <button onClick={fetchCampaign} className='bg-stone-700 p-2 rounded-lg font-medium text-white'>Refresh</button>
                 </div>
                 <div className="flex flex-col gap-1">
-                    {error
-                        ? <h1>{error}</h1>
-                        : campaigns.map((campaign) => (
-                            <div key={campaign.id} className="bg-white shadow p-2 rounded-lg">
-                                {campaign.name}
-                            </div>
-                        ))}
+                    {error ? (
+                        <h1>{error}</h1>
+                    ) : (
+                        campaigns.map((campaign, index) => (
+                            <motion.div
+                                key={campaign.id}
+                                className="bg-white shadow p-2 rounded-lg"
+                                initial={{ width: 0 }}
+                                animate={{ width: "100%" }}
+                                transition={{
+                                    duration: 0.5,
+                                    ease: "easeOut",
+                                    delay: index * 0.05,
+                                }}
+                            >
+                                <div className="overflow-hidden whitespace-nowrap">
+                                    {campaign.name}
+                                </div>
+                            </motion.div>
+                        ))
+                    )}
                 </div>
             </div>
             {isModalOpen && <CampaignModal closeModal={closeModal} />}

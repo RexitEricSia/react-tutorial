@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // "/api/campaign for proxy"
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8080', // base URL for all your APIs
+  baseURL: import.meta.env.VITE_API_BASE_URL, // base URL for all your APIs
 });
 
 export default axiosInstance;
